@@ -27,7 +27,7 @@
         <field name="model">vehicle.rental.property</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="customer_name"/>
+<!--                <field name="customer_name"/>-->
                 <field name="vehicle"/>
                 <field name="brand_name"/>
                 <field name="state"/>
@@ -49,7 +49,7 @@
 
 
                     <ul>
-                <li>Name:<field name="customer_name"/></li>
+<!--                <li>Name:<field name="customer_name"/></li>-->
                 <li>Vehicle:<field name="vehicle"/></li>
                 <li>Brand:<field name="brand_name"/></li>
                 <li>State<field name="state"/></li>
@@ -64,7 +64,69 @@
         </field>
     </record>
 
-        <record id="vehicle_rental_view_form" model="ir.ui.view">
+        <record id="rent_request_view_form" model="ir.ui.view">
+        <field name="name">rent.request.form.view</field>
+        <field name="model">rent.request</field>
+        <field name="arch" type="xml">
+           <form>
+               <header>
+                    <button name="action_confirm"
+                    string="Confirm" type="object"
+                    attrs="{'invisible': [('request_state', 'not in', ['draft'])]}"/>
+                    <button name="action_return"
+                    string="Return" type="object"
+                    attrs="{'invisible': [('request_state', 'not in', ['confirmed'])]}"/>
+
+                    <field name="request_state" widget="statusbar" statusbar_visible="draft,confirmed,returned" options="{'clickable':'1'}"/>
+               </header>
+    <sheet>
+        <div class="oe_title">
+               <h1>
+                      <field name="sequence" readonly="1"/>
+                </h1>
+             </div>
+        <group>
+
+            <group>
+<!--                <field name="customer_name" widget="Many2one(res_partner_many2one)" context="show_address":1/>-->
+                <field name="customer_name" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}" options='{"always_reload": True}'/>
+
+            </group>
+            <group>
+                <field name="request_date"/>
+            </group>
+            <group>
+                <field name="vehicle"/>
+            </group>
+            <group>
+                <field name="from_date"/>
+            </group>
+            <group>
+                <field name="to_date"/>
+            </group>
+            <group>
+                <field name="period"/>
+            </group>
+            <group>
+                <field name="currency_id" def="USD" position="attributes" invisible="1" readonly="1"/>
+                <field name="vehicle_rent" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+            </group>
+        </group>
+    </sheet>
+
+</form>
+        </field>
+    </record>
+    <record id="rent_request_sequence_order" model="ir.sequence">
+        <field name="name">Sequence Order</field>
+        <field name="code">rent.request</field>
+        <field name="number_next_actual">001</field>
+        <field name="prefix">RR</field>
+        <field name="padding">1</field>
+    </record>
+
+
+    <record id="vehicle_rental_view_form" model="ir.ui.view">
         <field name="name">vehicle.rental.form.view</field>
         <field name="model">vehicle.rental.property</field>
         <field name="arch" type="xml">
@@ -74,9 +136,9 @@
                </header>
     <sheet>
         <group>
-            <group>
-                <field name="customer_name"/>
-            </group>
+<!--            <group>-->
+<!--                <field name="customer_name"/>-->
+<!--            </group>-->
             <group>
                 <field name="vehicle"/>
             </group>
@@ -122,6 +184,23 @@
             </search>
         </field>
     </record>
+
+          <record id="rent_request_view_tree" model="ir.ui.view">
+        <field name="name">rent.request.tree.view</field>
+        <field name="model">rent.request</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="customer_name"/>
+                <field name="request_date"/>
+                <field name="vehicle"/>
+                <field name="request_state"/>
+<!--                <field name="model_year" optional="hide"/>-->
+<!--                <field name="vehicle_rent" optional="hide"/>-->
+
+            </tree>
+        </field>
+    </record>
+
 
     <openerp>
 
