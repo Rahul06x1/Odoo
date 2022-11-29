@@ -1,4 +1,0 @@
-id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-access_vehicle_rental_property_model,access_vehicle_rental_property_model,model_vehicle_rental_property,base.group_user,1,1,1,1
-access_rent_request_model,access_rent_request_model,model_rent_request,base.group_user,1,1,1,1
-
