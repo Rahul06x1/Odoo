@@ -28,6 +28,15 @@ class RentalRequest(models.Model):
 
         ], default='draft'
     )
+    period_type = fields.Many2one('time.selection', 'Period Type',domain=[("relation_id", "=", vehicle)])
+
+
+    # @api.onchange('vehicle')
+    # def onchange_partner_id(self):
+    #     for rec in self:
+    #         return {'domain': {'vehicle': [('vehicle.rental.property.vehicle', '=', rec.vehicle.id)]}}
+    # period_type = fields.Many2one('time.selection', 'Period Type',domain=onchange_partner_id())
+
 
     @api.onchange('vehicle')
     def _onchange_type(self):

@@ -140,6 +140,20 @@
                    <field name="state" widget="statusbar" statusbar_visible="available,not_available,sold" options="{'clickable':'1'}"/>
                </header>
     <sheet>
+        <div name="button_box" position="inside">
+
+        <button string="Request" class="oe_stat_button" type="object" name="get_vehicle_request"
+                        icon="fa-car">
+            <field string="Request" name="vehicle" widget="statinfo"/>
+        </button>
+          </div>
+<!--        <div name="button_box" position="inside">-->
+<!--                <button name="action_open_employee_cars" type="object"-->
+<!--                        class="oe_stat_button" icon="fa-car" groups="fleet.fleet_group_manager"-->
+<!--                        attrs="{'invisible': [('employee_cars_count', '=', 0)]}">-->
+<!--                    <field name="employee_cars_count" widget="statinfo" />-->
+<!--                </button>-->
+<!--            </div>-->
         <group>
 <!--            <group>-->
 <!--                <field name="customer_name"/>-->
@@ -168,7 +182,12 @@
                 </tree>
             </page>
             <page string="Rent Charge">
-                <field name="time"/>
+                <field name="time">
+                <tree editable="bottom">
+                <field name="selection_time"/>
+                <field name="time_amount"/>
+                </tree>
+                </field>
             </page>
         </notebook>
     </sheet>
@@ -241,6 +260,24 @@
         </record>
     </data>
 </openerp>
+
+<!--    <data>-->
+<!--        <record id="rent_request_smart_button" model="ir.ui.view">-->
+<!--            <field name="name">rent.request.view.buttons</field>-->
+<!--            <field name="model">vehicle.rental.property</field>-->
+<!--            <field name="inherit_id" ref="rent.request.rent_request_view_form" />-->
+<!--            <field name="arch" type="xml">-->
+<!--                <div name="button_box" position="inside">-->
+<!--                    <button class="oe_stat_button" type="object" name="get_vehicle_request"-->
+<!--                        icon="fa-car">-->
+<!--                        <field string="Vehicle" name="vehicle" widget="statinfo"/>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--    </data>-->
+
+
 
 
 

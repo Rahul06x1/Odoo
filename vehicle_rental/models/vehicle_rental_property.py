@@ -10,6 +10,22 @@ class InheritFleet(models.Model):
     # model_year = registration_date.year
 
 
+class TimeSelection(models.Model):
+    _name = "time.selection"
+    _rec_name = "selection_time"
+    selection_time = fields.Selection(string="Duration",
+                                      selection=[
+                                          ('hour', 'Hour'),
+                                          ('day', 'Day'),
+                                          ('week', 'Week'),
+                                          ('month', 'Month'),
+
+                                      ]
+                                      )
+    time_amount = fields.Integer('Rent Price')
+    relation_id = fields.Many2one('vehicle.rental.property')
+
+
 class VehicleRentalModel(models.Model):
     _name = "vehicle.rental.property"
     _rec_name = "combination"
@@ -25,16 +41,10 @@ class VehicleRentalModel(models.Model):
     registration_date = fields.Date('Registration Date', related='vehicle.registration_date', readonly=0)
     # model_year = registration_date.year
     model_year = fields.Char("Model Year", related='vehicle.model_year', readonly=0)
-    time = fields.Selection(
-        selection=[
-            ('hour', 'Hour'),
-            ('day', 'Day'),
-            ('week', 'Week'),
-            ('month', 'Month'),
 
-        ], default='day'
-    )
-    confirmed_rental_request = fields.One2many('rent.request', 'vehicle',readonly=1,
+    time = fields.One2many("time.selection", "relation_id")
+
+    confirmed_rental_request = fields.One2many('rent.request', 'vehicle', readonly=1,
                                                domain=[('request_state', '=', 'confirmed')])
 
     @api.onchange('registration_date')
@@ -64,6 +74,22 @@ class VehicleRentalModel(models.Model):
         ], default='available'
     )
     combination = fields.Char(string='Combination', compute='_compute_fields_combination')
+
+    def get_vehicle_request(self):
+        # self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Rental Request History',
+            'view_mode': 'tree',
+            'res_model': 'rent.request',
+            'domain': [('vehicle', '=', self.id)],
+            'context': "{'create': False}"
+        }
+
+    # @api.depends('vehicle.display_name', 'model_year')
+    # def _compute_fields_combination(self):
+    #     for test in self:
+    #         test.combination = str(test.vehicle.display_name + '/' + test.vehicle.model_year)
 
     @api.depends('vehicle.display_name', 'model_year')
     def _compute_fields_combination(self):
