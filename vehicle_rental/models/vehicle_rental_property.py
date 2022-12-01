@@ -28,7 +28,7 @@ class TimeSelection(models.Model):
 
 class VehicleRentalModel(models.Model):
     _name = "vehicle.rental.property"
-    _rec_name = "combination"
+    _rec_name = "vehicle"
     _description = "vehicle rental model"
     _inherit = 'mail.thread', 'mail.activity.mixin'
 
@@ -74,6 +74,8 @@ class VehicleRentalModel(models.Model):
         ], default='available'
     )
     combination = fields.Char(string='Combination', compute='_compute_fields_combination')
+    warning = fields.Boolean()
+    late = fields.Boolean()
 
     def get_vehicle_request(self):
         # self.ensure_one()
@@ -94,4 +96,4 @@ class VehicleRentalModel(models.Model):
     @api.depends('vehicle.display_name', 'model_year')
     def _compute_fields_combination(self):
         for test in self:
-            test.combination = str(test.vehicle.display_name + '/' + test.vehicle.model_year)
+            test.combination = str('test.vehicle.display_name' + '/' + 'test.vehicle.model_year')
