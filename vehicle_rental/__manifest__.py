@@ -7,7 +7,7 @@
     'description': "",
     # 'website': 'https://www.odoo.com/page/crm',
     'depends': [
-        'base','fleet','account'
+        'base','fleet','account','sale'
         ],
     'data' : [
             'security/ir.model.access.csv',

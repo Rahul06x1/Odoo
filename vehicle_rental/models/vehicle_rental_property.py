@@ -73,9 +73,14 @@ class VehicleRentalModel(models.Model):
 
         ], default='available'
     )
-    combination = fields.Char(string='Combination', compute='_compute_fields_combination')
-    warning = fields.Boolean()
-    late = fields.Boolean()
+    # combination = fields.Char(string='Combination', compute='_compute_fields_combination')
+    # @api.one
+    @api.depends('to_date')
+    def _set_warning(self):
+        self.warning = (datetime.today() == self.env["rent.request"].to_date)
+
+    warning = fields.Boolean(string='Warning', compute='_set_warning')
+    late = fields.Boolean(string='Late')
 
     def get_vehicle_request(self):
         # self.ensure_one()
@@ -93,7 +98,7 @@ class VehicleRentalModel(models.Model):
     #     for test in self:
     #         test.combination = str(test.vehicle.display_name + '/' + test.vehicle.model_year)
 
-    @api.depends('vehicle.display_name', 'model_year')
-    def _compute_fields_combination(self):
-        for test in self:
-            test.combination = str('test.vehicle.display_name' + '/' + 'test.vehicle.model_year')
+    # @api.depends('vehicle.display_name', 'model_year')
+    # def _compute_fields_combination(self):
+    #     for test in self:
+    #         test.combination = str('test.vehicle.display_name' + '/' + 'test.vehicle.model_year')

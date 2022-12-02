@@ -1,6 +1,8 @@
 from odoo import fields, models, api
 from datetime import datetime
 from odoo.exceptions import UserError
+# from odoo.addons.account.tests.common import AccountTestInvoicingCommon
+
 
 
 class RentalRequest(models.Model):
@@ -32,9 +34,7 @@ class RentalRequest(models.Model):
     )
     period_type = fields.Many2one('time.selection', 'Period Type')
 
-    time_amount = fields.Integer("Rent Priceee")
-
-
+    time_amount = fields.Integer("Rent Price")
 
     @api.onchange('period_type')
     def _onchange_period_type(self):
@@ -65,17 +65,28 @@ class RentalRequest(models.Model):
 
     def action_create_invoice(self):
         self.request_state = "invoiced"
-        invoice = self.env['account.move'].with_context(default_move_type='out_invoice').create({
+        invoice = self.env['account.move'].create({
             'move_type': 'out_invoice',
             'partner_id': self.customer_name.id,
             'currency_id': self.currency_id.id,
             'invoice_date': self.to_date,
+
             'invoice_line_ids': [(0, 0, {
-                'product_id': self.vehicle.id,
+                # 'product_id': self.env.ref('vehicle_rental.service_product_vehicle_rent').id,
+                'product_id': 57,
+
                 'quantity': 1,
+                'account_id': self.customer_name.property_account_receivable_id.id,
                 'price_unit': self.time_amount,
             })],
         })
+        print(invoice.invoice_line_ids)
+        print(self.env.ref('vehicle_rental.service_product_vehicle_rent').id)
+        print(self.env.ref('vehicle_rental.service_product_vehicle_rent').name)
+
+        print(self.customer_name.property_account_receivable_id.id)
+        print(self.customer_name.property_account_receivable_id.name)
+
         return {
             'name': 'create_invoice',
             'type': 'ir.actions.act_window',
@@ -84,7 +95,77 @@ class RentalRequest(models.Model):
             'res_model': 'account.move',
             'target': 'current'
         }
-        print(invoice)
+
+    # def action_create_invoice(self):
+    #     self.request_state = "invoiced"
+    #     # product_id__ = self.env.ref('vehicle_rental.service_product_vehicle_rent').id
+    #
+    #     invoice = self.env['account.move'].create({
+    #         'move_type': 'out_invoice',
+    #         'partner_id': self.customer_name.id,
+    #         'currency_id': self.currency_id.id,
+    #         'invoice_date': self.to_date,
+    #
+    #         'invoice_line_ids': [(0, 0, {
+    #
+    #             'name': 'suuu',
+    #
+    #             # 'product_id': self.env.ref('vehicle_rental.service_product_vehicle_rent').id,
+    #
+    #             # service_product_vehicle_rent.id,
+    #
+    #             'quantity': 1,
+    #             # 'account_id': self.customer_name.property_account_receivable_id.id,
+    #
+    #             'price_unit': self.time_amount,
+    #
+    #         })],
+    #     })
+    #     print(invoice.invoice_line_ids.product_id)
+    #     # print(product_id__)
+    #     print(self.env.ref('vehicle_rental.service_product_vehicle_rent'))
+    #
+    #     print(self.env.ref('vehicle_rental.service_product_vehicle_rent').id)
+    #     print(self.env.ref('vehicle_rental.service_product_vehicle_rent').name)
+    #
+    #     return {
+    #         'name': 'create_invoice',
+    #         'type': 'ir.actions.act_window',
+    #         'view_mode': 'form',
+    #         'res_id': invoice.id,
+    #         'res_model': 'account.move',
+    #         'target': 'current'
+    #     }
+        # rslt = self.env['account.move'].create({
+        #     'partner_id': self.customer_name.id,
+        #     'currency_id': self.currency_id.id,
+        #     'name': 'customer invoice',
+        #     'move_type': 'out_invoice',
+        #     # 'date_invoice': from_date,
+        #     # 'account_id': self.env.[account.move].account_receivable.id,
+        #     'invoice_line_ids': [(0, 0, {
+        #         'name': 'test line',
+        #         # 'origin': sale_order.name,
+        #         # 'account_id': self.account.id,
+        #         # 'price_unit': self.product_price_unit,
+        #         'quantity': 1.0,
+        #         'discount': 0.0,
+        #         # 'uom_id': product.uom_id.id,
+        #         # 'product_id': product.id,
+        #         # 'sale_line_ids': [(6, 0, [line.id for line in sale_order.order_line])],
+        #     })],
+        # })
+
+        # print(invoice)
+        # return self.env['account.move'].create([{
+        #     'move_type': 'out_invoice',
+        #     'partner_id': self.customer_name.id,
+        #     'date': '2017-01-01',
+        #     'invoice_date': '2017-01-01',
+        #     'invoice_line_ids': [Command.create({
+        #         'product_id': self.vehicle.id,
+        #     })]
+        # }])
 
         # invoice = self.env['account.move'].create({
         #     'type': 'out_invoice',

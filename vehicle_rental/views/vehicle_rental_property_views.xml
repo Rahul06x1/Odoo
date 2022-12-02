@@ -82,9 +82,13 @@
                    <button name="action_create_invoice" string="Create Invoice" type="object"
                    attrs="{'invisible': [('request_state', 'not in', ['confirmed'])]}"/>
 
+
                     <field name="request_state" widget="statusbar" statusbar_visible="draft,confirmed,returned,invoiced" options="{'clickable':'1'}"/>
+
                </header>
     <sheet>
+
+                   <widget name="web_ribbon" text="Paid" attrs="{'invisible': [('request_state', 'not in', ['invoiced'])]}"/>
         <div class="oe_title">
                <h1>
                       <field name="sequence" readonly="1"/>
@@ -249,7 +253,7 @@
     </record>
 
 
-    <openerp>
+
 
     <data>
         <record id="view_fleet_form_inherit" model="ir.ui.view">
@@ -269,7 +273,17 @@
             </field>
         </record>
     </data>
-</openerp>
+
+    <data>
+      <record model="product.product" id="service_product_vehicle_rent">
+         <field name="name">Vehicle Rent</field>
+<!--          <field name="model">rent.request</field>-->
+         <field name="type">service</field>
+<!--         <field name="purchase_line_warn">1</field>-->
+<!--         <field name="sale_line_warn">no-message</field>-->
+      </record>
+
+   </data>
 
 
 
