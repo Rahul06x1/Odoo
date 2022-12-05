@@ -29,13 +29,16 @@
         <field name="name">vehicle.rental.tree.view</field>
         <field name="model">vehicle.rental.property</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree string="Vehicle Rental" decoration-danger="late == True"
+                    decoration-warning="warning == True">
 <!--                <field name="customer_name"/>-->
                 <field name="vehicle"/>
                 <field name="brand_name"/>
                 <field name="state"/>
                 <field name="model_year" optional="hide"/>
                 <field name="vehicle_rent" optional="hide"/>
+                <field name="warning"/>
+                <field name="late"/>
 
             </tree>
         </field>
@@ -75,7 +78,7 @@
                <header>
                     <button name="action_confirm"
                     string="Confirm" type="object"
-                    attrs="{'invisible': [('request_state', 'not in', ['draft'])]}"/>
+                    attrs="{'invisible': [('request_state', 'not in', ['draft'])]}" groups="vehicle_rental.vehicle_rental_manager" class="btn-primary"/>
                     <button name="action_return"
                     string="Return" type="object"
                     attrs="{'invisible': [('request_state', 'not in', ['confirmed'])]}"/>
@@ -188,6 +191,9 @@
             <group>
                 <field name="late"/>
             </group>
+<!--            <group>-->
+<!--                <field name="to_date"/>-->
+<!--            </group>-->
         </group>
         <notebook>
             <page string="Rent Request">

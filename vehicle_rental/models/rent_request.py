@@ -1,8 +1,9 @@
 from odoo import fields, models, api
 from datetime import datetime
 from odoo.exceptions import UserError
-# from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
+
+# from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
 class RentalRequest(models.Model):
@@ -15,6 +16,8 @@ class RentalRequest(models.Model):
     customer_name = fields.Many2one('res.partner', 'Customer')
     request_date = fields.Date('Request Date', default=datetime.today())
     vehicle = fields.Many2one('vehicle.rental.property', 'Vehicle')
+    # vehicle = fields.Many2one('fleet.vehicle', 'Vehicle')
+
     from_date = fields.Date('From date')
     to_date = fields.Date('To date')
     period = fields.Integer('Period', readonly=1)
@@ -71,12 +74,13 @@ class RentalRequest(models.Model):
             'currency_id': self.currency_id.id,
             'invoice_date': self.to_date,
 
+
             'invoice_line_ids': [(0, 0, {
                 # 'product_id': self.env.ref('vehicle_rental.service_product_vehicle_rent').id,
-                'product_id': 57,
+                'product_id': 42,
 
                 'quantity': 1,
-                'account_id': self.customer_name.property_account_receivable_id.id,
+                # 'account_id': self.customer_name.property_account_receivable_id.id,
                 'price_unit': self.time_amount,
             })],
         })
@@ -136,72 +140,72 @@ class RentalRequest(models.Model):
     #         'res_model': 'account.move',
     #         'target': 'current'
     #     }
-        # rslt = self.env['account.move'].create({
-        #     'partner_id': self.customer_name.id,
-        #     'currency_id': self.currency_id.id,
-        #     'name': 'customer invoice',
-        #     'move_type': 'out_invoice',
-        #     # 'date_invoice': from_date,
-        #     # 'account_id': self.env.[account.move].account_receivable.id,
-        #     'invoice_line_ids': [(0, 0, {
-        #         'name': 'test line',
-        #         # 'origin': sale_order.name,
-        #         # 'account_id': self.account.id,
-        #         # 'price_unit': self.product_price_unit,
-        #         'quantity': 1.0,
-        #         'discount': 0.0,
-        #         # 'uom_id': product.uom_id.id,
-        #         # 'product_id': product.id,
-        #         # 'sale_line_ids': [(6, 0, [line.id for line in sale_order.order_line])],
-        #     })],
-        # })
+    # rslt = self.env['account.move'].create({
+    #     'partner_id': self.customer_name.id,
+    #     'currency_id': self.currency_id.id,
+    #     'name': 'customer invoice',
+    #     'move_type': 'out_invoice',
+    #     # 'date_invoice': from_date,
+    #     # 'account_id': self.env.[account.move].account_receivable.id,
+    #     'invoice_line_ids': [(0, 0, {
+    #         'name': 'test line',
+    #         # 'origin': sale_order.name,
+    #         # 'account_id': self.account.id,
+    #         # 'price_unit': self.product_price_unit,
+    #         'quantity': 1.0,
+    #         'discount': 0.0,
+    #         # 'uom_id': product.uom_id.id,
+    #         # 'product_id': product.id,
+    #         # 'sale_line_ids': [(6, 0, [line.id for line in sale_order.order_line])],
+    #     })],
+    # })
 
-        # print(invoice)
-        # return self.env['account.move'].create([{
-        #     'move_type': 'out_invoice',
-        #     'partner_id': self.customer_name.id,
-        #     'date': '2017-01-01',
-        #     'invoice_date': '2017-01-01',
-        #     'invoice_line_ids': [Command.create({
-        #         'product_id': self.vehicle.id,
-        #     })]
-        # }])
+    # print(invoice)
+    # return self.env['account.move'].create([{
+    #     'move_type': 'out_invoice',
+    #     'partner_id': self.customer_name.id,
+    #     'date': '2017-01-01',
+    #     'invoice_date': '2017-01-01',
+    #     'invoice_line_ids': [Command.create({
+    #         'product_id': self.vehicle.id,
+    #     })]
+    # }])
 
-        # invoice = self.env['account.move'].create({
-        #     'type': 'out_invoice',
-        #     'journal_id': journal.id,
-        #     'partner_id': product_id.id,
-        #     'invoice_date': date_invoice,
-        #     'date': date_invoice,
-        #     'invoice_line_ids': [(0, 0, {
-        #         'product_id': product_id.id,
-        #         'quantity': 40.0,
-        #         'name': 'product test 1',
-        #         'discount': 10.00,
-        #         'price_unit': 2.27,
-        #     })]
-        # })
-        # return invoice
-        # rslt = self.env['account.move'].create({
-        #     'partner_id': self.customer_name.id,
-        #     # 'currency_id': self.currency_two.id,
-        #     'name': 'customer invoice',
-        #     'type': 'out_invoice',
-        #     # 'date_invoice': date,
-        #     'account_id': self.env['account'].account_receivable.id,
-        #     'invoice_line_ids': [(0, 0, {
-        #         'name': 'test line',
-        #         # 'origin': sale_order.name,
-        #         # 'account_id': self.account_income.id,
-        #         'price_unit': self.product_price_unit,
-        #         'quantity': 1.0,
-        #         'discount': 0.0,
-        #         # 'uom_id': product.uom_id.id,
-        #         # 'product_id': product.id,
-        #         # 'sale_line_ids': [(6, 0, [line.id for line in sale_order.order_line])],
-        #     })],
-        # })
-        # return rslt
+    # invoice = self.env['account.move'].create({
+    #     'type': 'out_invoice',
+    #     'journal_id': journal.id,
+    #     'partner_id': product_id.id,
+    #     'invoice_date': date_invoice,
+    #     'date': date_invoice,
+    #     'invoice_line_ids': [(0, 0, {
+    #         'product_id': product_id.id,
+    #         'quantity': 40.0,
+    #         'name': 'product test 1',
+    #         'discount': 10.00,
+    #         'price_unit': 2.27,
+    #     })]
+    # })
+    # return invoice
+    # rslt = self.env['account.move'].create({
+    #     'partner_id': self.customer_name.id,
+    #     # 'currency_id': self.currency_two.id,
+    #     'name': 'customer invoice',
+    #     'type': 'out_invoice',
+    #     # 'date_invoice': date,
+    #     'account_id': self.env['account'].account_receivable.id,
+    #     'invoice_line_ids': [(0, 0, {
+    #         'name': 'test line',
+    #         # 'origin': sale_order.name,
+    #         # 'account_id': self.account_income.id,
+    #         'price_unit': self.product_price_unit,
+    #         'quantity': 1.0,
+    #         'discount': 0.0,
+    #         # 'uom_id': product.uom_id.id,
+    #         # 'product_id': product.id,
+    #         # 'sale_line_ids': [(6, 0, [line.id for line in sale_order.order_line])],
+    #     })],
+    # })
+    # return rslt
 
     @api.onchange('from_date', 'to_date')
     def calculate_date(self):
