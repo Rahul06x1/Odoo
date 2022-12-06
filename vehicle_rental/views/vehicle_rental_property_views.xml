@@ -19,7 +19,7 @@
 
 
 
-    <menuitem id="test_menu_root" name="Vehicle Rental" sequence="1"/>
+    <menuitem id="test_menu_root" name="Vehicle Rental" sequence="2"/>
     <menuitem id="test_model_menu_action" parent="test_menu_root" action="vehicle_rental_model_action"/>
     <menuitem id="rent_request" name="Rent Request" parent="test_menu_root" action="vehicle_rent_request_action"/>
 
@@ -273,9 +273,7 @@
         <xpath expr="//field[@name='first_contract_date']" position="attributes">
             <attribute name="invisible">True</attribute>
         </xpath>
-<!--        <xpath expr="//field[@name='model_year']" position="replace">-->
-<!--		    <field name="model_year"/>-->
-<!--		</xpath>-->
+
             </field>
         </record>
     </data>
@@ -283,10 +281,8 @@
     <data>
       <record model="product.product" id="service_product_vehicle_rent">
          <field name="name">Vehicle Rent</field>
-<!--          <field name="model">rent.request</field>-->
          <field name="type">service</field>
-<!--         <field name="purchase_line_warn">1</field>-->
-<!--         <field name="sale_line_warn">no-message</field>-->
+
       </record>
 
    </data>

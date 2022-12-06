@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+
+    <record id="material_request_request_action" model="ir.actions.act_window">
+        <field name="name">Material Request</field>
+        <field name="res_model">material.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+    <menuitem id="material_request_root_menu" name="Material Request" sequence="1"/>
+
+    <menuitem id="material_request_menu" name="Material Request" parent='material_request_root_menu' action="material_request_request_action"/>
+
+
+    <record id="material_request_view_form" model="ir.ui.view">
+        <field name="name">material.request.form.view</field>
+        <field name="model">material.request</field>
+        <field name="arch" type="xml">
+           <form>
+               <header>
+                   <button name="action_submit_material_request"
+                    string="Submit" type="object" class="btn-primary"/>
+                   <button name="action_approve_material_request"
+                    string="Approve" type="object" class="btn-primary" attrs="{'invisible': [('state', 'not in', ['to_approve'])]}"/>
+                   <button name="action_confirm_material_request"
+                    string="Confirm" type="object" class="btn-primary" attrs="{'invisible': [('state', 'not in', ['approved'])]}"/>
+                   <button name="action_reject_material_request"
+                    string="Reject" type="object"  class="btn-primary" groups="material_request.material_request_requisition_head"/>
+
+                   <field name="state" widget="statusbar" statusbar_visible="draft,to_approve,approved,confirmed,reject" options="{'clickable':'1'}"/>
+
+<!--                   <button name="action_create_purchase_order"-->
+<!--                    string="Create Purchase Order" type="object" class="btn-primary"/>-->
+<!--                   <button name="action_create_internal_transfer"-->
+<!--                    string="Internal Transfer" type="object" class="btn-primary"/>-->
+               </header>
+               <group>
+                   <field name="employee_name_id"/>
+               </group>
+               <group>
+                   <field name="material_request_order_line_rel_id">
+                    <tree editable="bottom">
+                        <field name="product_name_id"/>
+                        <field name="product_receive_mode"/>
+
+                    </tree>
+                </field>
+               </group>
+           </form>
+        </field>
+    </record>
+
+    <record id="material_request_view_tree" model="ir.ui.view">
+        <field name="name">material.request.tree.view</field>
+        <field name="model">material.request</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_name_id"/>
+                <field name="state"/>
+
+
+
+            </tree>
+        </field>
+    </record>
+
+
+
+
+<!--    <record id="material_request_view_kanban" model="ir.ui.view">-->
+<!--        <field name="name">material.request.kanban.view</field>-->
+<!--        <field name="model">material.request</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <kanban>-->
+<!--                <templates>-->
+<!--                    <t t-name="kanban-box">-->
+<!--                        <div class="oe_kanban_global_click_edit">-->
+
+
+<!--                    <ul>-->
+<!--                <li>Employee:<field name="employee_name_id"/></li>-->
+
+<!--                </ul>-->
+
+<!--                        </div>-->
+<!--                 </t>-->
+<!--                </templates>-->
+<!--            </kanban>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+
+</odoo>
