@@ -23,7 +23,7 @@
            <form>
                <header>
                    <button name="action_submit_material_request"
-                    string="Submit" type="object" class="btn-primary"/>
+                    string="Submit" type="object" class="btn-primary" attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
                    <button name="action_approve_material_request"
                     string="Approve" type="object" class="btn-primary" attrs="{'invisible': [('state', 'not in', ['to_approve'])]}"/>
                    <button name="action_confirm_material_request"
@@ -38,20 +38,49 @@
 <!--                   <button name="action_create_internal_transfer"-->
 <!--                    string="Internal Transfer" type="object" class="btn-primary"/>-->
                </header>
+               <sheet>
+                   <div name="button_box" position="inside">
+                        <button string="Purchase Orders" class="oe_stat_button" type="object" name="get_purchase_order"
+                        icon="fa-car">
+<!--            <field string="Request" name="vehicle" widget="statinfo"/>-->
+                        </button>
+                       <button string="Internal Transfers" class="oe_stat_button" type="object" name="get_internal_transfer"
+                        icon="fa-car">
+<!--            <field string="Request" name="vehicle" widget="statinfo"/>-->
+                        </button>
+                    </div>
+                   <h1>
+                      <field name="sequence" readonly="1"/>
+                </h1>
+
+
+
+
+
                <group>
                    <field name="employee_name_id"/>
                </group>
                <group>
-                   <field name="material_request_order_line_rel_id">
+                   <field name="material_request_order_line_rel_id" attrs="{'readonly':[('state','!=','draft')]}">
                     <tree editable="bottom">
                         <field name="product_name_id"/>
+                        <field name="product_qty"/>
+
                         <field name="product_receive_mode"/>
 
                     </tree>
                 </field>
                </group>
+               </sheet>
+               <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+            </div>
            </form>
+
         </field>
+
     </record>
 
     <record id="material_request_view_tree" model="ir.ui.view">
@@ -66,9 +95,16 @@
 
             </tree>
         </field>
+
     </record>
 
-
+<record id="rent_request_sequence_order" model="ir.sequence">
+        <field name="name">Sequence Order</field>
+        <field name="code">material.request</field>
+        <field name="number_next_actual">001</field>
+        <field name="prefix">MR</field>
+        <field name="padding">1</field>
+    </record>
 
 
 <!--    <record id="material_request_view_kanban" model="ir.ui.view">-->
