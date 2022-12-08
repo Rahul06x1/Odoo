@@ -14,7 +14,6 @@
         <field name="name">Rent Request</field>
         <field name="res_model">rent.request</field>
         <field name="view_mode">tree,form</field>
-<!--        <field name="context">{'search_default_available': 1}</field>-->
     </record>
 
 
@@ -31,7 +30,6 @@
         <field name="arch" type="xml">
             <tree string="Vehicle Rental" decoration-danger="late == True"
                     decoration-warning="warning == True">
-<!--                <field name="customer_name"/>-->
                 <field name="vehicle"/>
                 <field name="brand_name"/>
                 <field name="state"/>
@@ -54,13 +52,12 @@
                         <div class="oe_kanban_global_click_edit">
 
 
-                    <ul>
-<!--                <li>Name:<field name="customer_name"/></li>-->
-                <li>Vehicle:<field name="vehicle"/></li>
-                <li>Brand:<field name="brand_name"/></li>
-                <li>State<field name="state"/></li>
-                <li>Model Year:<field name="model_year"/></li>
-               <li>Rent Price:<field name="vehicle_rent"/></li>
+                <ul>
+                    <li>Vehicle:<field name="vehicle"/></li>
+                    <li>Brand:<field name="brand_name"/></li>
+                    <li>State<field name="state"/></li>
+                    <li>Model Year:<field name="model_year"/></li>
+                    <li>Rent Price:<field name="vehicle_rent"/></li>
                 </ul>
 
                         </div>
@@ -91,7 +88,7 @@
                </header>
     <sheet>
 
-                   <widget name="web_ribbon" text="Paid" attrs="{'invisible': [('request_state', 'not in', ['invoiced'])]}"/>
+        <widget name="web_ribbon" text="Paid" attrs="{'invisible': [('request_state', 'not in', ['invoiced'])]}"/>
         <div class="oe_title">
                <h1>
                       <field name="sequence" readonly="1"/>
@@ -124,7 +121,8 @@
                 <field name="period_type" domain="[('relation_id', '=', vehicle)]"/>
             </group>
             <group>
-                <field name="time_amount"/>
+                <field name="currency_id" def="USD" position="attributes" invisible="1" readonly="1"/>
+                <field name="time_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
             </group>
             <group>
                 <field name="currency_id" def="USD" position="attributes" invisible="1" readonly="1"/>
@@ -191,9 +189,6 @@
             <group>
                 <field name="late"/>
             </group>
-<!--            <group>-->
-<!--                <field name="to_date"/>-->
-<!--            </group>-->
         </group>
         <notebook>
             <page string="Rent Request">
@@ -205,7 +200,8 @@
                 <field name="time">
                     <tree editable="bottom">
                         <field name="selection_time"/>
-                        <field name="time_amount"/>
+                        <field name="currency_id" def="USD" position="attributes" invisible="1" readonly="1"/>
+                        <field name="time_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
                     </tree>
                 </field>
             </page>
@@ -251,8 +247,6 @@
                 <field name="request_date"/>
                 <field name="vehicle"/>
                 <field name="request_state"/>
-<!--                <field name="model_year" optional="hide"/>-->
-<!--                <field name="vehicle_rent" optional="hide"/>-->
 
             </tree>
         </field>
@@ -278,14 +272,6 @@
         </record>
     </data>
 
-    <data>
-      <record model="product.product" id="service_product_vehicle_rent">
-         <field name="name">Vehicle Rent</field>
-         <field name="type">service</field>
-
-      </record>
-
-   </data>
 
 
 

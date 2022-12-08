@@ -3,7 +3,7 @@ from datetime import datetime
 from odoo.exceptions import UserError
 
 
-class RentalRequest(models.Model):
+class RentRequest(models.Model):
     _name = "rent.request"
     _description = "rental request"
     _rec_name = "sequence"
@@ -33,7 +33,7 @@ class RentalRequest(models.Model):
     )
     period_type = fields.Many2one('time.selection', 'Period Type')
 
-    time_amount = fields.Integer("Rent Price")
+    time_amount = fields.Monetary("Rent Price")
 
     @api.onchange('period_type')
     def _onchange_period_type(self):
@@ -46,7 +46,7 @@ class RentalRequest(models.Model):
     @api.model
     def create(self, vals):
         vals['sequence'] = self.env['ir.sequence'].next_by_code('rent.request')
-        return super(RentalRequest, self).create(vals)
+        return super(RentRequest, self).create(vals)
 
     def action_confirm(self):
         self.request_state = "confirmed"
@@ -65,18 +65,11 @@ class RentalRequest(models.Model):
             'invoice_date': self.to_date,
 
             'invoice_line_ids': [(0, 0, {
-                'product_id': 42,
-
+                'name': "Vehicle Rent",
                 'quantity': 1,
                 'price_unit': self.time_amount,
             })],
         })
-        print(invoice.invoice_line_ids)
-        print(self.env.ref('vehicle_rental.service_product_vehicle_rent').id)
-        print(self.env.ref('vehicle_rental.service_product_vehicle_rent').name)
-
-        print(self.customer_name.property_account_receivable_id.id)
-        print(self.customer_name.property_account_receivable_id.name)
 
         return {
             'name': 'create_invoice',

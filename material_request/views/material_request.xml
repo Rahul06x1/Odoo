@@ -31,22 +31,16 @@
                    <button name="action_reject_material_request"
                     string="Reject" type="object"  class="btn-primary" groups="material_request.material_request_requisition_head"/>
 
-                   <field name="state" widget="statusbar" statusbar_visible="draft,to_approve,approved,confirmed,reject" options="{'clickable':'1'}"/>
+                   <field name="state" widget="statusbar" statusbar_visible="draft,to_approve,approved,confirmed,reject"/>
 
-<!--                   <button name="action_create_purchase_order"-->
-<!--                    string="Create Purchase Order" type="object" class="btn-primary"/>-->
-<!--                   <button name="action_create_internal_transfer"-->
-<!--                    string="Internal Transfer" type="object" class="btn-primary"/>-->
                </header>
                <sheet>
                    <div name="button_box" position="inside">
                         <button string="Purchase Orders" class="oe_stat_button" type="object" name="get_purchase_order"
-                        icon="fa-car">
-<!--            <field string="Request" name="vehicle" widget="statinfo"/>-->
+                        icon="fa-credit-card">
                         </button>
                        <button string="Internal Transfers" class="oe_stat_button" type="object" name="get_internal_transfer"
-                        icon="fa-car">
-<!--            <field string="Request" name="vehicle" widget="statinfo"/>-->
+                        icon="fa-truck">
                         </button>
                     </div>
                    <h1>
@@ -107,27 +101,6 @@
     </record>
 
 
-<!--    <record id="material_request_view_kanban" model="ir.ui.view">-->
-<!--        <field name="name">material.request.kanban.view</field>-->
-<!--        <field name="model">material.request</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <kanban>-->
-<!--                <templates>-->
-<!--                    <t t-name="kanban-box">-->
-<!--                        <div class="oe_kanban_global_click_edit">-->
-
-
-<!--                    <ul>-->
-<!--                <li>Employee:<field name="employee_name_id"/></li>-->
-
-<!--                </ul>-->
-
-<!--                        </div>-->
-<!--                 </t>-->
-<!--                </templates>-->
-<!--            </kanban>-->
-<!--        </field>-->
-<!--    </record>-->
 
 
 

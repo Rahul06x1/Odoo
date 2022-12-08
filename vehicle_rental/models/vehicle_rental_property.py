@@ -19,17 +19,21 @@ class TimeSelection(models.Model):
 
                                       ]
                                       )
-    time_amount = fields.Integer('Rent Price')
+    company_id = fields.Many2one('res.company', 'Company')
+    currency_id = fields.Many2one('res.currency', 'Currency',
+                                  default=lambda self: self.env.company.currency_id.id, required=True)
+    time_amount = fields.Monetary('Rent Price')
     relation_id = fields.Many2one('vehicle.rental.property')
 
 
 class VehicleRentalModel(models.Model):
     _name = "vehicle.rental.property"
-    _rec_name = "vehicle"
+    _rec_name = "sequence"
 
     _description = "vehicle rental model"
     _inherit = 'mail.thread', 'mail.activity.mixin'
 
+    sequence = fields.Char(compute='name_get')
     vehicle = fields.Many2one('fleet.vehicle', 'Vehicle', required=True, domain=[("state_id.name", "=", "Registered")])
 
     brand_name = fields.Char('Brand', help="Brand of the vehicle", related='vehicle.brand_id.name',
@@ -46,7 +50,15 @@ class VehicleRentalModel(models.Model):
 
     to_date = fields.Date("To Date", compute="get_to_date", readonly=0)
 
-    #
+    @api.depends('model_year', 'vehicle')
+    def name_get(self):
+        sequence = []
+        for rec in self:
+            sequence.append(
+                (rec.id, '%s / %s' % (rec.vehicle.name,
+                                      rec.model_year)))
+        return sequence
+
     def get_to_date(self):
         for rec in self:
             rent_request_id = rec.env['rent.request'].search([('vehicle', '=', rec.id)], limit=1)
