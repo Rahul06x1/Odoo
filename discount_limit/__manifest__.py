@@ -1,11 +1,11 @@
 {
     'name': 'Discount Limit',
     'version': '16.0.1.0.2',
-    'sequence': 1,
+    'sequence': 3,
     'summary': 'Discount Limit',
     'description': "",
     'depends': [
-        'base','sale_management'
+        'base', 'sale_management'
         ],
     'data': [
 

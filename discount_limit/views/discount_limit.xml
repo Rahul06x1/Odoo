@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
 
                 <xpath expr="//field[@name='module_sale_margin']" position="after">
-		    <div class="col-12 col-lg-6 o_setting_box"
+		            <div class="col-12 col-lg-6 o_setting_box"
                            id="discount_limit_per_month"
                            title="Set maximum discount limit per month.">
                            <div class="o_setting_left_pane">
@@ -27,8 +27,8 @@
                                     </div>
                                 </div>
                            </div>
-                       </div>
-		</xpath>
+                    </div>
+		        </xpath>
 
 
             </field>
