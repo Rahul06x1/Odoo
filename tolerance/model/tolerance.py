@@ -1,22 +1,52 @@
 from odoo import fields, models, api
 
 
-class SaleOrderLine(models.Model):
+class InheritSaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    # partner_id = fields.Many2one('res.partner', string='Partner ID')
-    tolerance = fields.Integer("Tolerance", related='order_id.partner_id.tolerance', readonly=0)
+    tolerance = fields.Integer("Tolerance", compute='_compute_tolerance', readonly=0, store=True)
 
-    # @api.depends('sale.order.partner_id')
-    # def _compute_tolerance(self):
-    #     print(self)
-    #     print(self.partner_id)
+    @api.depends('order_id.partner_id.tolerance')
+    def _compute_tolerance(self):
+        for rec in self:
+            rec.tolerance = rec.order_id.partner_id.tolerance
+
+
+class InheritPurchaseOrderLine(models.Model):
+    _inherit = 'purchase.order.line'
+
+    tolerance = fields.Integer("Tolerance", compute='_compute_tolerance', readonly=0, store=True)
+
+    @api.depends('order_id.partner_id.tolerance')
+    def _compute_tolerance(self):
+        for rec in self:
+            rec.tolerance = rec.order_id.partner_id.tolerance
 
 
 class InheritResPartner(models.Model):
     _inherit = 'res.partner'
     tolerance = fields.Integer("Tolerance")
 
-# class Tolerance(models.Model):
-#     _name = "tolerance"
-#     _description = "Tolerance"
+
+class InheritStockPicking(models.Model):
+    _inherit = 'stock.picking'
+
+    def button_validate(self):
+
+        for rec in self.move_ids:
+            if rec.purchase_line_id:
+                tolerance = rec.purchase_line_id.tolerance
+            if rec.sale_line_id:
+                tolerance = rec.sale_line_id.tolerance
+            min_tolerance = rec.product_uom_qty - tolerance
+            max_tolerance = rec.product_uom_qty + tolerance
+            if not min_tolerance <= rec.quantity_done <= max_tolerance:
+                return {
+                    'name': 'Tolerance Warning',
+                    'type': 'ir.actions.act_window',
+                    'res_model': 'tolerance.warning.wizard',
+                    'view_mode': 'form',
+                    'target': 'new'
+                }
+        res = super(InheritStockPicking, self).button_validate()
+        return res

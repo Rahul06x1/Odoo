@@ -1,8 +1,8 @@
 {
-    'name': 'vehicle rental',
+    'name': 'Vehicle Rental',
     'version': '16.0.1.0.2',
     # 'category': 'Sales/CRM',
-    'sequence': 5,
+    'sequence': 1,
     'summary': 'Rent Vehicles',
     'description': "",
     # 'website': 'https://www.odoo.com/page/crm',

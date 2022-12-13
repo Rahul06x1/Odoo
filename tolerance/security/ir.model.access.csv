@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+
+access_tolerance_warning_wizard_model,access_tolerance_warning_wizard_model,model_tolerance_warning_wizard,base.group_user,1,1,1,1

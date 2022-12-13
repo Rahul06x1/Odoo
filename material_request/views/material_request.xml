@@ -11,7 +11,7 @@
 
 
 
-    <menuitem id="material_request_root_menu" name="Material Request" sequence="1"/>
+    <menuitem id="material_request_root_menu" name="Material Request" sequence="3"/>
 
     <menuitem id="material_request_menu" name="Material Request" parent='material_request_root_menu' action="material_request_request_action"/>
 

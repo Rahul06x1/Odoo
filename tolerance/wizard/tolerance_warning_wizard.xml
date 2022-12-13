@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    	<record id="tolerance_warning_wizard_view_form" model="ir.ui.view">
+        	<field name="name">tolerance.warning.wizard.form</field>
+        	<field name="model">tolerance.warning.wizard</field>
+        	<field name="arch" type="xml">
+            	<form string="Test">
+					<p>Tolerance not yet met</p>
+                </form>
+				<footer>
+					<button name="action_done" string="Accept" type="object" class="btn-primary"/>
+    				<button string="Don't Accept" class="btn-primary" special="cancel"/>
+				</footer>
+        	</field>
+    	</record>
+    	<record id="tolerance_warning_wizard_action" model="ir.actions.act_window">
+        	<field name="name">Tolerance Warning Wizard</field>
+        	<field name="type">ir.actions.act_window</field>
+        	<field name="res_model">tolerance.warning.wizard</field>
+        	<field name="view_mode">form</field>
+        	<field name="view_id" ref="tolerance_warning_wizard_view_form"/>
+        	<field name="target">new</field>
+    	</record>
+</odoo>
