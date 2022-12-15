@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_vehicle_order">
+        <t t-call="web.html_container">
+<!--            <t t-foreach="vehicle_data" t-as="o">-->
+                <t t-call="web.external_layout">
+                    <div class="page">
+                       <div class="oe_structure"/>
+                        <div class="text-center"/>
+                        <h1>Vehicle Rental Report</h1>
+                    </div>
+                    <table>
+                        <tr>
+                            <td>Vehicle Name</td>
+                            <td>:</td>
+                            <td>
+                                <t t-if="form_data.get('vehicle_id')">
+                                    <t t-esc="form_data['vehicle_id'][1]"/>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Date From</td>
+                            <td>:</td>
+                            <td>
+                                <t t-if="form_data.get('date_from')">
+                                    <t t-esc="form_data['date_from']"/>
+                                </t>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Date To</td>
+                            <td>:</td>
+                            <td>
+                                <t t-if="form_data.get('date_to')">
+                                    <t t-esc="form_data['date_to']"/>
+                                </t>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <strong>Sl.no</strong>
+                                </th>
+                                <th>
+                                    <strong>Customer Name</strong>
+                                </th>
+                                <th>
+                                    <strong>Model</strong>
+                                </th>
+                                <th>
+                                    <strong>No. of days</strong>
+                                </th>
+                                <th>
+                                    <strong>State</strong>
+                                </th>
+                            </tr>
+                        </thead>
+
+<!--                        <span><t t-esc="rent_request_data"/></span>-->
+                        <t t-foreach="rent_request_data" t-as="rent">
+                            <tr>
+                                <td>
+                                    <span t-esc="rent['sequence']"/>
+                                </td>
+                                <td>
+                                    <span t-esc="rent['customer_name']"/>
+                                </td>
+                                <td>
+                                    <span t-esc="rent['vehicle']"/>
+                                </td>
+                                <td>
+                                    <span t-esc="rent['period']"/>
+                                </td>
+                                <td>
+                                    <span t-esc="rent['request_state']"/>
+                                </td>
+                            </tr>
+                            </t>
+                    </table>
+                    </div>
+                </t>
+        </t>
+    </template>
+</odoo>
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </t>-->
+<!--    </t>-->
+
+
+<!--</template>-->
+<!--                    </table>-->
+<!--                    </div>-->
+
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                </t>-->
+<!--            </t>-->
+<!--&lt;!&ndash;        </t>&ndash;&gt;-->
+<!--    </template>-->
+<!--<template id="report_vehicle_order">-->
+<!--    <t t-call="web.html_container">-->
+<!--        <t t-foreach="vehicle" t-as="o">-->
+<!--            <t t-call="web.external_layout">-->
+<!--                <div class="page">-->
+<!--                    <h2>Sample Report</h2>-->
+<!--                    <p>-->
+<!--                        <span t-field="o.vehicle"/>-->
+<!--                    </p>-->
+<!--                </div>-->
+<!--            </t>-->
+<!--        </t>-->
+<!--    </t>-->
+<!--</template>-->

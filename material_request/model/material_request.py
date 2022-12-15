@@ -136,7 +136,7 @@ class MaterialRequest(models.Model):
             'context': "{'create': False}"
         }
 
-    def get_internal_transfer(self):
+    def get_internal_transmaterial_request_idfer(self):
 
         return {
             'type': 'ir.actions.act_window',

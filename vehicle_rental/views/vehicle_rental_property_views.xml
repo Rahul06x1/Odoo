@@ -21,8 +21,8 @@
     <menuitem id="test_menu_root" name="Vehicle Rental" sequence="1"/>
     <menuitem id="test_model_menu_action" parent="test_menu_root" action="vehicle_rental_model_action"/>
     <menuitem id="rent_request" name="Rent Request" parent="test_menu_root" action="vehicle_rent_request_action"/>
-    <menuitem id="vehicle_rental_report" name="Vehicle Rental Report" parent="test_menu_root"/>
-    <menuitem id="vehicle_rental_report_sub_menu" name="Vehicle Rental Report" parent="vehicle_rental_report"/>
+    <menuitem id="vehicle_rental_report" name="Vehicle Rental Report" parent="test_menu_root" action="vehicle_rent_request_action"/>
+    <menuitem id="vehicle_rental_report_sub_menu" name="Vehicle Rental Report" parent="vehicle_rental_report" action="vehicle_rental_report_wizard_action"/>
 
 
 
@@ -117,7 +117,7 @@
                 <field name="to_date"/>
             </group>
             <group>
-                <field name="period"/>
+                <field name="period" force_save="1"/>
             </group>
             <group>
                 <field name="period_type" domain="[('relation_id', '=', vehicle)]"/>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="vehicle_rental_report_wizard_view_form" model="ir.ui.view">
+        <field name="name">vehicle.rental.report.wizard.form</field>
+        <field name="model">vehicle.rental.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="vehicle_id"/>
+                </group>
+
+                <footer>
+                    <button name="print_sample_report" string="Print" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="vehicle_rental_report_wizard_action" model="ir.actions.act_window">
+        <field name="name">Vehicle Rental Report Wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">vehicle.rental.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="vehicle_rental_report_wizard_view_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

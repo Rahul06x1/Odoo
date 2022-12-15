@@ -1,18 +1,22 @@
 {
     'name': 'Vehicle Rental',
     'version': '16.0.1.0.2',
-    # 'category': 'Sales/CRM',
     'sequence': 1,
     'summary': 'Rent Vehicles',
     'description': "",
-    # 'website': 'https://www.odoo.com/page/crm',
     'depends': [
-        'base','fleet','account','sale'
+        'base', 'fleet', 'account', 'sale'
         ],
-    'data' : [
+    'data': [
             'security/vehicle_rental_security_group.xml',
             'security/ir.model.access.csv',
-             'views/vehicle_rental_property_views.xml'
+
+            'wizard/vehicle_rental_report_wizard.xml',
+
+            'reports/vehicle_rental_report_template.xml',
+            'reports/vehicle_rental_report.xml',
+
+            'views/vehicle_rental_property_views.xml',
     ],
     'installable': True,
     'application': True,
