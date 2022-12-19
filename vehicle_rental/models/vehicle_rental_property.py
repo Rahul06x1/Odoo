@@ -74,9 +74,6 @@ class VehicleRentalModel(models.Model):
                 today = date.today()
                 diff = rec.to_date - today
 
-                print(diff, 'ss')
-                print(diff.days, 'dd')
-
                 if 0 <= diff.days <= 2:
 
                     rec.warning = True
@@ -90,18 +87,14 @@ class VehicleRentalModel(models.Model):
 
     @api.onchange('registration_date')
     def _onchange_type(self):
-        print(self.registration_date)
 
         for rec in self:
             if rec.vehicle.registration_date:
-                print("date_yr", rec.registration_date.year)
                 rec.model_year = rec.registration_date.year
-                print("model year", rec.model_year)
 
     company_id = fields.Many2one('res.company', 'Company')
     currency_id = fields.Many2one('res.currency', 'Currency',
                                   default=lambda self: self.env.company.currency_id.id, required=True)
-    vehicle_rent = fields.Monetary('Rent', currency_field='currency_id')
 
     state = fields.Selection(
         selection=[

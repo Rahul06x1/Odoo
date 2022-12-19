@@ -36,7 +36,6 @@
                 <field name="brand_name"/>
                 <field name="state"/>
                 <field name="model_year" optional="hide"/>
-                <field name="vehicle_rent" optional="hide"/>
                 <field name="warning"/>
                 <field name="late"/>
 
@@ -59,7 +58,6 @@
                     <li>Brand:<field name="brand_name"/></li>
                     <li>State<field name="state"/></li>
                     <li>Model Year:<field name="model_year"/></li>
-                    <li>Rent Price:<field name="vehicle_rent"/></li>
                 </ul>
 
                         </div>
@@ -85,7 +83,7 @@
                    attrs="{'invisible': [('request_state', 'not in', ['confirmed'])]}"/>
 
 
-                    <field name="request_state" widget="statusbar" statusbar_visible="draft,confirmed,returned,invoiced" options="{'clickable':'1'}"/>
+                    <field name="request_state" widget="statusbar" statusbar_visible="draft,confirmed,returned,invoiced"/>
 
                </header>
     <sheet>
@@ -126,10 +124,6 @@
                 <field name="currency_id" def="USD" position="attributes" invisible="1" readonly="1"/>
                 <field name="time_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
             </group>
-            <group>
-                <field name="currency_id" def="USD" position="attributes" invisible="1" readonly="1"/>
-                <field name="vehicle_rent" widget='monetary' options="{'currency_field': 'currency_id'}"/>
-            </group>
         </group>
     </sheet>
                <div class="oe_chatter">
@@ -156,7 +150,7 @@
         <field name="arch" type="xml">
            <form>
                <header>
-                   <field name="state" widget="statusbar" statusbar_visible="available,not_available,sold" options="{'clickable':'1'}"/>
+                   <field name="state" widget="statusbar" statusbar_visible="available,not_available,sold"/>
                </header>
     <sheet>
         <div name="button_box" position="inside">
@@ -180,10 +174,6 @@
             </group>
             <group>
                 <field name="model_year"/>
-            </group>
-            <group>
-                <field name="currency_id" def="USD" position="attributes" invisible="1" readonly="1"/>
-                <field name="vehicle_rent" widget='monetary' options="{'currency_field': 'currency_id'}"/>
             </group>
             <group>
                 <field name="warning"/>

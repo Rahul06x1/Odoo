@@ -18,6 +18,11 @@
 
             'views/vehicle_rental_property_views.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'vehicle_rental/static/src/js/action_manager.js',
+        ]},
+
     'installable': True,
     'application': True,
     'auto_install': False

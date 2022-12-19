@@ -12,7 +12,8 @@
                 </group>
 
                 <footer>
-                    <button name="print_sample_report" string="Print" type="object" class="btn-primary"/>
+                    <button name="print_pdf_report" string="Print PDF" type="object" class="btn-primary"/>
+                    <button name="print_xlsx" string="Print Excel" type="object" class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
@@ -26,4 +27,13 @@
         <field name="view_id" ref="vehicle_rental_report_wizard_view_form"/>
         <field name="target">new</field>
     </record>
+    <record id="action_xlsx_report" model="ir.actions.act_window">
+        <field name="name">Excel</field>
+        <field name="res_model">vehicle.rental.report.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="excel_report" name="Excel Report"
+               parent="stock.menu_warehouse_report" action="action_xlsx_report"/>
 </odoo>

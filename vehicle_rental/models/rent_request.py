@@ -18,10 +18,9 @@ class RentRequest(models.Model):
     to_date = fields.Date('To date')
     period = fields.Integer('Period', readonly=1)
     model_year = fields.Char("Model year", related='vehicle.model_year', readonly=0)
-    # company_id = fields.Many2one('res.company', 'Company')
+    company_id = fields.Many2one('res.company', 'Company')
     currency_id = fields.Many2one('res.currency', 'Currency',
                                   default=lambda self: self.env.company.currency_id.id, required=True)
-    vehicle_rent = fields.Monetary('Rent')
     request_state = fields.Selection(
         selection=[
             ('draft', 'Draft'),
@@ -38,10 +37,6 @@ class RentRequest(models.Model):
     @api.onchange('period_type')
     def _onchange_period_type(self):
         self.time_amount = self.period_type.time_amount
-
-    @api.onchange('vehicle')
-    def _onchange_type(self):
-        self.vehicle_rent = self.vehicle.vehicle_rent
 
     @api.model
     def create(self, vals):
