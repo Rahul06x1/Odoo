@@ -6,11 +6,11 @@
         	<field name="arch" type="xml">
             	<form string="Test">
 					<p>Tolerance not yet met</p>
+					<footer>
+						<button name="action_done" string="Accept" type="object" class="btn-primary"/>
+						<button string="Don't Accept" class="btn-primary" special="cancel"/>
+					</footer>
                 </form>
-				<footer>
-					<button name="action_done" string="Accept" type="object" class="btn-primary"/>
-    				<button string="Don't Accept" class="btn-primary" special="cancel"/>
-				</footer>
         	</field>
     	</record>
     	<record id="tolerance_warning_wizard_action" model="ir.actions.act_window">

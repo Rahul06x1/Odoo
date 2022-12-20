@@ -11,31 +11,31 @@
                     </div>
                     <table cellspacing="0" cellpadding="0">
                         <tr>
+                            <t t-if="form_data.get('vehicle_id')">
                             <td>Vehicle Name</td>
                             <td>:</td>
                             <td>
-                                <t t-if="form_data.get('vehicle_id')">
                                     <t t-esc="form_data['vehicle_id'][1]"/>
-                                </t>
                             </td>
+                            </t>
                         </tr>
                         <tr>
+                            <t t-if="form_data.get('date_from')">
                             <td>Date From</td>
                             <td>:</td>
                             <td>
-                                <t t-if="form_data.get('date_from')">
                                     <t t-esc="form_data['date_from']"/>
-                                </t>
                             </td>
+                            </t>
                         </tr>
                         <tr>
+                            <t t-if="form_data.get('date_to')">
                             <td>Date To</td>
                             <td>:</td>
                             <td>
-                                <t t-if="form_data.get('date_to')">
                                     <t t-esc="form_data['date_to']"/>
-                                </t>
                             </td>
+                            </t>
                         </tr>
                     </table>
                     <div class="row">
