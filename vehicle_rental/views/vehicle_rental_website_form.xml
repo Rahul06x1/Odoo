@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+
+    <record id="rent_request_menu" model="website.menu">
+        <field name="name">Rent Vehicle</field>
+        <field name="url">/vehicle_rental_web_form</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence">5</field>
+    </record>
+    <template id="vehicle_rental_page" name="VEHICLE RENTAL">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="oe_structure">
+                    <div class="container">
+                        <form role="form" action="/create_rent_request" methods="POST">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="form-group">
+                                <label for="customer_name" class="control-label">Name</label>
+                                <input type="text" name="customer_name" t-att-value="customer_name" id="customer_name"
+                                       class="form-control" required="required"/>
+                            </div>
+                            <div class="clearfix oe_login_buttons">
+                                <button type="submit" class="btn btn-primary pull-left">SUBMIT</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    <record id="rent_request_thanks" model="website.page">
+        <field name="name">Thanks</field>
+        <field name="type">qweb</field>
+        <field name="url">/create_rent_request</field>
+        <field name="website_published">True</field>
+        <field name="key">vehicle_rental.rent_request_thanks</field>
+        <field name="arch" type="xml">
+            <t name="Thanks" t-name="vehicle_rental.rent_request_thanks">
+                <t t-call="website.layout">
+                    <div class="container">
+                        <h1>Thanks</h1>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="alert alert-success" role="status">
+                                    Rent Request Created Successfully
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </field>
+    </record>
+
+
+</odoo>

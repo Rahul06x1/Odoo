@@ -18,7 +18,7 @@ class VehicleRentalReportWizard(models.TransientModel):
     vehicle_id = fields.Many2one('vehicle.rental.property', 'Vehicle')
 
     def print_xlsx(self):
-        if (self.date_from == True) and (self.date_to == True) and (self.date_from > self.date_to):
+        if bool(self.date_from) == True and bool(self.date_to) == True and self.date_from > self.date_to:
             raise ValidationError('Start Date must be less than End Date')
         query = """select fleet_vehicle.name as v_name,res_partner.name as c_name,rent_request.period,rent_request.request_state from rent_request
         inner join vehicle_rental_property on rent_request.vehicle = vehicle_rental_property.id
@@ -86,7 +86,7 @@ class VehicleRentalReportWizard(models.TransientModel):
         output.close()
 
     def print_pdf_report(self):
-        if (self.date_from == True) and (self.date_to == True) and (self.date_from > self.date_to):
+        if bool(self.date_from) == True and bool(self.date_to) == True and self.date_from > self.date_to:
             raise ValidationError('Start Date must be less than End Date')
 
         query = """select fleet_vehicle.name as v_name,res_partner.name as c_name,rent_request.period,rent_request.request_state from rent_request

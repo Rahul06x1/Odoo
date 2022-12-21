@@ -5,7 +5,7 @@
     'summary': 'Rent Vehicles',
     'description': "",
     'depends': [
-        'base', 'fleet', 'account', 'sale'
+        'base', 'fleet', 'account', 'sale', 'website'
         ],
     'data': [
             'security/vehicle_rental_security_group.xml',
@@ -17,6 +17,8 @@
             'reports/vehicle_rental_report.xml',
 
             'views/vehicle_rental_property_views.xml',
+            # 'views/template.xml'
+            'views/vehicle_rental_website_form.xml'
     ],
     'assets': {
         'web.assets_backend': [
