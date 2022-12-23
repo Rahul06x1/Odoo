@@ -23,7 +23,11 @@
     'assets': {
         'web.assets_backend': [
             'vehicle_rental/static/src/js/action_manager.js',
-        ]},
+        ],
+        'web.assets_frontend': [
+            'vehicle_rental/static/src/js/vehicle_rental_website.js',
+        ]
+    },
 
     'installable': True,
     'application': True,
