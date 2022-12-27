@@ -2,7 +2,6 @@
 <odoo>
 
 
-
     <record id="rent_request_menu" model="website.menu">
         <field name="name">Rent Vehicle</field>
         <field name="url">/vehicle_rental_web_form</field>
@@ -16,21 +15,18 @@
                 <div class="oe_structure">
                     <div class="container">
                         <form role="form" action="/create_rent_request" methods="POST">
-<!--                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>-->
-
                             <div class="form-group">
                                 <label for="customer_name" class="control-label">Name</label>
-                                <select name="customer_name" class="form-control link-style">
-                                    <t t-foreach="customer_rec" t-as="customer">
-                                        <option t-esc="customer.name" t-att-value="customer.id"/>
-                                    </t>
-                                </select>
+                                <input type="text" name="customer_name" t-att-value="customer_rec.name"
+                                       id="customer_name"
+                                       class="form-control" required="required"/>
                             </div>
                             <div class="form-group">
                                 <label for="vehicle" class="control-label">Vehicle</label>
                                 <select id="vehicle" name="vehicle" class="form-control link-style">
+<!--                                    <option t-att-value="default"/>-->
                                     <t t-foreach="vehicle_rec" t-as="vehicle">
-                                        <option t-esc="vehicle.id" t-att-value="vehicle.id"/>
+                                        <option t-esc="vehicle.vehicle.name" t-att-value="vehicle.id"/>
                                     </t>
                                 </select>
                             </div>
@@ -46,26 +42,20 @@
                             </div>
                             <div class="form-group">
                                 <label for="period_type" class="control-label">Period Type</label>
+                                <!--                                <t t-if="period_type.relation_id = vehicle_rec.id">-->
                                 <select id="period_type" name="period_type" class="form-control link-style">
-                                    <t t-foreach="period_type_rec" t-as="period_type">
-<!--                                        <option t-esc="period_type.id" t-att-value="period_type.id"/>-->
-<!--                                        <t t-if="vehicle.id == '3'">-->
-                                        <option  t-att-value="period_type.id">
-                                        <t t-esc="period_type.selection_time"/>
-                                        </option>
-<!--                                        </t>-->
-                                    </t>
                                 </select>
+
                             </div>
                             <div class="form-group">
-                                <label for="time_amount" class="control-label">Amount</label>
+                                <label for="`time_amount`" class="control-label">Amount</label>
                                 <input type="float" name="time_amount" t-att-value="time_amount" id="time_amount"
                                        class="form-control"/>
 
                             </div>
 
                             <div class="clearfix oe_login_buttons">
-                                <button type="submit" class="btn btn-primary pull-left">SUBMIT</button>
+                                <button id="xyz" type="submit" class="btn btn-primary pull-left">SUBMIT</button>
                             </div>
                         </form>
                     </div>
