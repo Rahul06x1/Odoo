@@ -55,13 +55,16 @@ class MaterialRequest(models.Model):
     )
 
     def action_submit_material_request(self):
-        self.state = "to_approve"
+        self.write({'state': 'to_approve'})
+        self.sale_order_id.action_confirm()
 
     def action_approve_material_request(self):
-        self.state = "approved"
+        # self.state = "approved"
+        self.write({'state': 'approved'})
 
     def action_confirm_material_request(self):
-        self.state = "confirmed"
+        # self.state = "confirmed"
+        self.write({'state': 'confirmed'})
         order_line = []
         vendor_list = []
         for rec in self.material_request_order_line_rel_id:
@@ -118,7 +121,8 @@ class MaterialRequest(models.Model):
         print(it)
 
     def action_reject_material_request(self):
-        self.state = "reject"
+        # self.state = "reject"
+        self.write({'state': 'reject'})
 
     @api.model
     def create(self, vals):

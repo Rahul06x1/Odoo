@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="basic_snippet" name="Dynamic Snippet">
+        <section class="container dynamic_snippet_blog">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Dynamic Snippet</h1>
+                    Total Products Sold:
+                    <span id="total_sold"/>
+                </div>
+            </div>
+        </section>
+    </template>
+    <template id="external_snippets" inherit_id="website.snippets" priority="8">
+        <xpath expr="//div[@id='snippet_effect']//t[@t-snippet][last()]" position="after">
+            <t t-snippet="latest_elearning_courses_snippet.basic_snippet"/>
+        </xpath>
+    </template>
+<!--    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++==-->
+<!--        <template id="basic_snippet" name="Dynamic Snippet">-->
+<!--        <section class="oe_structure container dynamic_snippet_blog">-->
+<!--            <div class="card-dynamic m-auto">-->
+<!--&lt;!&ndash;                <t t-if="products">&ndash;&gt;-->
+<!--                <t>-->
+<!--                    <div class="col-md-12">-->
+<!--                    <h1>Dynamic Snippet</h1>-->
+<!--                    Total Products Sold:-->
+
+<!--                </div>-->
+
+<!--&lt;!&ndash;                    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <h1>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <span t-esc="products.name"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </h1>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <button>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <span t-esc="products.list_price"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </button>&ndash;&gt;-->
+<!--                        <div>-->
+<!--                            <button>Purchase</button>-->
+<!--                            <span id="js_new_product"/>-->
+<!--                        </div>-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                </t>-->
+
+<!--            </div>-->
+<!--        </section>-->
+<!--    </template>-->
+<!--    <template id="external_snippets" inherit_id="website.snippets" name="Dynamic Snippet" priority="8">-->
+<!--        <xpath expr="//div[@id='snippet_effect']//t[@t-snippet][last()]" position="after">-->
+<!--            <t t-snippet="latest_elearning_courses_snippet.basic_snippet"/>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+<!--    ==++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+
+
+
+
+
+</odoo>

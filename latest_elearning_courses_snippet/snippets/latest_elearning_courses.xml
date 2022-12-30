@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- template for our snippet -->
+    <template id="elearning_courses" name="Elearning Courses - Dynamic">
+        <section class="oe_structure elearning_courses">
+            <div class="container">
+                <div class="text-center py-5">
+                    <h2 class="h1">Elearning Courses</h2>
+                </div>
+
+                <!-- element to store list of cities using JS -->
+                <div class="row justify-content-center" id="elearning-courses-row"/>
+            </div>
+        </section>
+    </template>
+
+    <!-- To be used in JS for snippet options -->
+<!--    <template id="explore_cities_options" inherit_id="website.snippet_options">-->
+<!--        <xpath expr="//div[@data-js='Box']" position="before">-->
+<!--            <div data-js="ExploreCitiesOptions" data-selector=".explore-cities" data-drop-in=".o_mega_menu nav">-->
+<!--            </div>-->
+<!--        </xpath>-->
+<!--    </template>-->
+<!--    <template id="external_snippets" inherit_id="website.snippets" name="Dynamic Snippet" priority="8">-->
+<!--        <xpath expr="//div[@id='snippet_effect']//t[@t-snippet][last()]" position="after">-->
+<!--            <t t-snippet="latest_elearning_courses_snippet.elearning_courses"/>-->
+<!--        </xpath>-->
+<!--    </template>-->
+    <template id="external_snippets" inherit_id="website.snippets" priority="8">
+        <xpath expr="//div[@id='snippet_effect']//t[@t-snippet][last()]" position="after">
+            <t t-snippet="latest_elearning_courses_snippet.elearning_courses"/>
+        </xpath>
+    </template>
+</odoo>

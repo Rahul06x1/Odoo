@@ -5,7 +5,7 @@
     'summary': 'Material Request',
     'description': "",
     'depends': [
-        'base', 'hr', "purchase", "stock"
+        'base', 'hr', "purchase", "stock",
         ],
     'data': [
         'security/material_request_security_group.xml',
