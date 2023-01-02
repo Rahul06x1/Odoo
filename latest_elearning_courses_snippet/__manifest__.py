@@ -8,7 +8,6 @@
         'base', 'website', 'website_slides'
         ],
     'data': [
-            # 'views/latest_elearning_courses_snippet.xml',
             'snippets/latest_elearning_courses.xml'
     ],
     'assets': {
