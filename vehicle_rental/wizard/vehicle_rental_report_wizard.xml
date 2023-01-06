@@ -34,6 +34,6 @@
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
-    <menuitem id="excel_report" name="Excel Report"
-               parent="stock.menu_warehouse_report" action="action_xlsx_report"/>
+<!--    <menuitem id="excel_report" name="Excel Report"-->
+<!--               parent="stock.menu_warehouse_report" action="action_xlsx_report"/>-->
 </odoo>

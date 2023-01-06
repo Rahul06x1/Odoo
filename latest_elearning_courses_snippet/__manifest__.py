@@ -13,7 +13,7 @@
     'assets': {
         'web.assets_frontend': [
             'latest_elearning_courses_snippet/static/src/js/latest_elearning_courses_snippet.js',
-            'latest_elearning_courses_snippet/static/src/css/style.css',
+            'latest_elearning_courses_snippet/static/src/xml/snippets.xml',
         ],
     },
 

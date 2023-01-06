@@ -7,12 +7,10 @@
                 <div class="text-center py-5">
                     <h2 class="h1">Elearning Courses</h2>
                 </div>
-                <div class="row justify-content-center" id="elearning-courses-row"/>
+                <div class="row justify-content-center" id="all_courses"/>
             </div>
         </section>
     </template>
-
-
 
 
     <template id="external_snippets" inherit_id="website.snippets" priority="8">
