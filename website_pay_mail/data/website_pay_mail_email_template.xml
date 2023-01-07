@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--   <data>-->
+       <record id="email_template_name" model="mail.template">
+           <field name="name">EMAIL TEMPLATE NAME</field>
+           <field name="model_id" ref="website_pay_mail.model_sale_order"/>
+           <field name="auto_delete" eval="True"/>
+           <field name="email_from">{{object.company_id.email}}</field>
+           <field name="email_to">{{ object.user_id.login }}</field>
+           <field name="subject">{{ object.company_id.name }} {{ (object.get_portal_last_transaction().state == 'pending') and 'Pending Order' or 'Order' }} (Ref {{ object.name or 'n/a' }})</field>
+           <field name="body_html" type="html">
+               <div>
+                   <p>
+                       <br/>
+                       <br/>
+
+                       <b>Customer Name:</b>
+                       <span t-out="object.partner_id.name or ''"/>
+                       <br/>
+                       <b>Sale Order number:</b>
+                       <span t-out="object.name or ''"/>
+                       <br/>
+                       <b>Total Amount:</b>
+                       <span t-out="format_amount(object.amount_total, object.currency_id) or ''"/>
+                       <br/>
+                   </p>
+                       <div style="margin: 0px; padding: 0px;">
+                           <table width="100%" style="color: #454748; font-size: 12px; border-collapse: collapse;">
+                               <tr style="border-bottom: 2px solid #dee2e6;">
+                                   <td width="15%" align="left">
+                                       <span style="font-weight:bold;">Products</span>
+                                   </td>
+                                   <td width="15%" align="left">
+                                       <span style="font-weight:bold;">Quantity</span>
+                                   </td>
+                                   <td width="20%" align="left">
+                                       <span style="font-weight:bold;">Amount</span>
+                                   </td>
+                               </tr>
+                           </table>
+                           <t t-foreach="object.order_line" t-as="line">
+                               <table width="100%" style="color: #454748; font-size: 12px; border-collapse: collapse;">
+                                   <tr style="border-bottom: 2px solid #dee2e6;">
+                                       <td width="15%" align="left" t-out="line.product_id.name"/>
+                                       <td width="15%" align="left" t-out="line.product_uom_qty"/>
+                                       <td width="20%" align="left" t-out="line.price_subtotal"/>
+                                   </tr>
+                               </table>
+                           </t>
+                        <br/>
+                       </div>
+                       <br/>
+                       <table>
+                       <div>
+                           <button style="background-color: purple; border: none; border-radius: 12px; padding: 10px 24px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;">
+                               <a t-attf-href="/my/orders/{{object.id}}" class="btn bt-primary" role="button" style=" color: white; ">SALE ORDER
+                               </a>
+                           </button>
+                       </div>
+                       </table>
+
+
+                   <br/>
+               </div>
+           </field>
+       </record>
+<!--   </data>-->
+</odoo>

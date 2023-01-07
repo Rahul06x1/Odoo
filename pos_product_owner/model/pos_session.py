@@ -7,5 +7,4 @@ class PosSession(models.Model):
     def _loader_params_product_product(self):
         result = super()._loader_params_product_product()
         result['search_params']['fields'].extend(['product_owner_id'])
-        print('result', result)
         return result

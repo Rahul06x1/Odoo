@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="qr_code_generator_wizard" model="ir.ui.view">
+        <field name="name">qr.code.generator.wizard</field>
+        <field name="model">qr.code.generator.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>
