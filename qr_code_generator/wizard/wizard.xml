@@ -6,9 +6,15 @@
         <field name="arch" type="xml">
             <form>
                 <group>
-                    <field name="date_from"/>
-                    <field name="date_to"/>
+                    <field name="text"/>
+                    <field name="qr_code" widget='image' class="oe_avatar"  attrs="{'invisible': [('qr_code', '=', False)]}"/>
                 </group>
+                <footer>
+                    <button name="download_qr_code_btn" string="Download QR Code" type="object" class="btn-primary" attrs="{'invisible': [('qr_code', '=', False)]}"/>
+                    <button name="generate_qr_code_btn" string="Generate QR Code" type="object" class="btn-primary"/>
+                    <button name="reset_btn" string="Reset" type="object" attrs="{'invisible': [('text', '=', False)]}"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
             </form>
         </field>
     </record>

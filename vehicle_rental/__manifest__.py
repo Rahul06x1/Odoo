@@ -17,7 +17,6 @@
             'reports/vehicle_rental_report.xml',
 
             'views/vehicle_rental_property_views.xml',
-            # 'views/template.xml'
             'views/vehicle_rental_website_form.xml'
     ],
     'assets': {

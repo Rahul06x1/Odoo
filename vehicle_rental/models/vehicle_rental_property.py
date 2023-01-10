@@ -37,7 +37,7 @@ class VehicleRentalModel(models.Model):
     vehicle = fields.Many2one('fleet.vehicle', 'Vehicle', required=True, domain=[("state_id.name", "=", "Registered")])
 
     brand_name = fields.Char('Brand', help="Brand of the vehicle", related='vehicle.brand_id.name',
-                             store=True)  # required=True,
+                             store=True)
     registration_date = fields.Date('Registration Date', related='vehicle.registration_date', readonly=0)
     model_year = fields.Char("Model Year", related='vehicle.model_year', readonly=0)
 

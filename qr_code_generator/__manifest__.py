@@ -8,7 +8,10 @@
         'base', "sale_management"
         ],
     'data': [
-        'wizard/wizard.xml',
+            'security/ir.model.access.csv',
+            'reports/qr_code_pdf_template.xml',
+            'reports/qr_code_pdf.xml',
+            'wizard/wizard.xml',
     ],
     'assets': {
         'web.assets_backend': {

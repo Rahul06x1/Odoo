@@ -1,8 +1,6 @@
 odoo.define('vehicle_rental.period_type', function (require) {
 "use strict";
-// Use an empty array to search for all the records
 var domain = [];
-// Use an empty array to read all the fields of the records
 var fields = [];
 
 var rpc = require('web.rpc');
@@ -13,7 +11,6 @@ var rpc = require('web.rpc');
     args: [domain, fields],
 }).then(function (data) {
 $("#vehicle").change(function(){
-//if ($('#vehicle').find(":selected").val()!='default'){
 
                     var current = data.filter((elem) => elem.relation_id[0] == $(this).val())
 
@@ -36,7 +33,6 @@ $("#vehicle").change(function(){
                 }).then(function (data) {
                 $("#period_type").change(function(){
                 console.log($('#period_type').find(":selected"));
-            //    var current = data.filter((elem) => elem.id == $(this).val())
                 $('#time_amount').val($('#period_type').find(":selected").data('time_amount'));
             });
     });

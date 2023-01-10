@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_qr_code_pdf" model="ir.actions.report">
+        <field name="name">QR Code Generator</field>
+        <field name="model">qr.code.generator.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">qr_code_generator.qr_code_pdf</field>
+        <field name="report_file">qr_code_generator.qr_code_pdf</field>
+    </record>
+</odoo>
