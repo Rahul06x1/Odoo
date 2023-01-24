@@ -1,7 +1,7 @@
 {
     'name': 'Vehicle Rental',
     'version': '16.0.1.0.2',
-    'sequence': 1,
+    'sequence': -21,
     'summary': 'Rent Vehicles',
     'description': "",
     'depends': [

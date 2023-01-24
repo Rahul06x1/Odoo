@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="inventory_repair_model_action" model="ir.actions.act_window">
+        <field name="name">inventory repair</field>
+        <field name="res_model">inventory.repair</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <menuitem id="inventory_repair" parent="stock.menu_stock_warehouse_mgmt" name="Repair" action="inventory_repair_model_action"/>
+
+    <record id="inventory_repair_view_form" model="ir.ui.view">
+        <field name="name">inventory.repair.form.view</field>
+        <field name="model">inventory.repair</field>
+        <field name="arch" type="xml">
+           <form>
+               <header>
+                   <button name="action_confirm"
+                    string="Confirm" type="object"
+                    attrs="{'invisible': [('state', 'not in', ['draft'])]}" class="btn-primary"/>
+                    <button name="action_done"
+                    string="Done" type="object"
+                    attrs="{'invisible': [('state', 'not in', ['confirm'])]}" class="btn-primary"/>
+
+                   <field name="state" widget="statusbar" statusbar_visible="done,confirm,done"/>
+               </header>
+    <sheet>
+
+        <group>
+
+            <group>
+                <field name="sale_order_id"/>
+            </group>
+            <group>
+                <field name="customer_id"/>
+            </group>
+            <group>
+                <field name="product_id"/>
+            </group>
+        </group>
+
+
+    </sheet>
+
+
+     <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+            </div>
+</form>
+        </field>
+    </record>
+</odoo>

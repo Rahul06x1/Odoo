@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="survey_templates_inherit_survey" inherit_id="survey.survey_page_fill">
+            <xpath expr="//div[hasclass('o_survey_form')]" position="inside">
+
+                <span class="idletimer fw-bold text-danger"> </span>
+            </xpath>
+        </template>
+    </data>
+</odoo>

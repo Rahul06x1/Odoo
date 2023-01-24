@@ -8,8 +8,6 @@
         'base', 'website', 'website_sale'
         ],
     'data': [
-
-
     ],
 
     'installable': True,

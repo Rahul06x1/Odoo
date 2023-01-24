@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="advanced_stock_move_report_menu" name="Advanced Stock Move Report " sequence="98" parent="stock.menu_warehouse_report" action="advanced_stock_move_report_wizard_action"/>
+
+</odoo>

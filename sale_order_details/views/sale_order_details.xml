@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="res_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='contact_addresses']" position="after">
+                <page string="Sale Orders">
+                            <tree>
+                                <field name="sale_order_ids" readonly="1"/>
+                            </tree>
+                        </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="partner_view_buttons">
+            <field name="name">partner.view.buttons</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="priority" eval="11"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button type="object" class="oe_stat_button" icon="fa-credit-card" name="get_product_bought">
+                        <div class="o_form_field o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="product_bought_count"/>
+                            </span>
+                            <span class="o_stat_text">Total Product Sold</span>
+                        </div>
+                    </button>
+                </div>
+            </field>
+    </record>
+
+</odoo>

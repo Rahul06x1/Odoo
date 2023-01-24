@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="stock_move_pdf_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure">
+                        <div class="text-center">
+                            <h1>Stock Move Report</h1>
+                        </div>
+                    </div>
+                    <!--                        <table cellspacing="0" cellpadding="0">-->
+                    <!--                        <tr>-->
+                    <!--                            <t t-if="form_data.get('product_id')">-->
+                    <!--                            <td>Product</td>-->
+                    <!--                            <td>:</td>-->
+                    <!--                            <td>-->
+                    <!--                                    <t t-esc="form_data['product_id'][1]"/>-->
+                    <!--                            </td>-->
+                    <!--                            </t>-->
+                    <!--                        </tr>-->
+                    <!--                            <tr>-->
+                    <!--                            <t t-if="form_data.get('location_id')">-->
+                    <!--                            <td>Location</td>-->
+                    <!--                            <td>:</td>-->
+                    <!--                            <td>-->
+                    <!--                                    <t t-esc="form_data['location_id'][1]"/>-->
+                    <!--                            </td>-->
+                    <!--                            </t>-->
+                    <!--                        </tr>-->
+                    <!--                            <tr>-->
+                    <!--                            <t t-if="form_data.get('state')">-->
+                    <!--                            <td>Status</td>-->
+                    <!--                            <td>:</td>-->
+                    <!--                            <td>-->
+                    <!--                                    <t t-esc="form_data['state']"/>-->
+                    <!--                            </td>-->
+                    <!--                            </t>-->
+                    <!--                        </tr>-->
+                    <!--                        <tr>-->
+                    <!--                            <t t-if="form_data.get('date_from')">-->
+                    <!--                            <td>Start Date</td>-->
+                    <!--                            <td>:</td>-->
+                    <!--                            <td>-->
+                    <!--                                    <t t-esc="form_data['date_from']"/>-->
+                    <!--                            </td>-->
+                    <!--                            </t>-->
+                    <!--                        </tr>-->
+                    <!--                        <tr>-->
+                    <!--                            <t t-if="form_data.get('date_to')">-->
+                    <!--                            <td>End Date</td>-->
+                    <!--                            <td>:</td>-->
+                    <!--                            <td>-->
+                    <!--                                    <t t-esc="form_data['date_to']"/>-->
+                    <!--                            </td>-->
+                    <!--                            </t>-->
+                    <!--                        </tr>-->
+                    <!--                    </table>-->
+                    <div class="row">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <strong>Date</strong>
+                                    </th>
+                                    <th>
+                                        <strong>Reference</strong>
+                                    </th>
+                                    <th>
+                                        <strong>Product</strong>
+                                    </th>
+                                    <th>
+                                        <strong>From</strong>
+                                    </th>
+                                    <th>
+                                        <strong>To</strong>
+                                    </th>
+                                    <t t-if="not(form_data.get('state'))">
+                                        <th>
+                                            <strong>Status</strong>
+                                        </th>
+                                    </t>
+                                </tr>
+                            </thead>
+                            <t t-set="heading_customer" t-value="False"/>
+                            <t t-set="heading_internal" t-value="False"/>
+                            <t t-foreach="stock_move_data" t-as="data">
+                                <t t-if="data['usage'] == 'customer'">
+                                    <t t-if="heading_customer == False">
+                                        <th>
+                                            <strong>
+                                                <span t-esc="data['usage']"/>
+                                            </strong>
+                                            <t t-set="heading_customer" t-value="True"/>
+                                        </th>
+                                    </t>
+                                    <tr>
+                                        <td>
+                                            <span t-esc="data['date']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="data['reference']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="data['p_name']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="data['from']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="data['to']"/>
+                                        </td>
+                                        <t t-if="not(form_data.get('state'))">
+                                            <td>
+                                                <span t-esc="data['status']"/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                                <t t-if="data['usage'] == 'internal'">
+                                    <t t-if="heading_internal == False">
+                                        <th>
+                                            <strong>
+                                                <span t-esc="data['usage']"/>
+                                            </strong>
+                                            <t t-set="heading_internal" t-value="True"/>
+                                        </th>
+                                    </t>
+                                    <tr>
+                                        <td>
+                                            <span t-esc="data['date']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="data['reference']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="data['p_name']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="data['from']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="data['to']"/>
+                                        </td>
+                                        <t t-if="not(form_data.get('state'))">
+                                            <td>
+                                                <span t-esc="data['status']"/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                            </t>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

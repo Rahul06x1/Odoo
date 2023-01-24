@@ -30,7 +30,7 @@ class VehicleRentalReportWizard(models.TransientModel):
         if self.date_from:
             query += """ and from_date >= '%s'""" % self.date_from
         if self.date_to:
-            query += """ and to_date >= '%s'""" % self.date_to
+            query += """ and to_date <= '%s'""" % self.date_to
         self.env.cr.execute(query)
         rent_request_data = self.env.cr.dictfetchall()
         data = {
@@ -99,7 +99,7 @@ class VehicleRentalReportWizard(models.TransientModel):
         if self.date_from:
             query += """ and from_date >= '%s'""" % self.date_from
         if self.date_to:
-            query += """ and to_date >= '%s'""" % self.date_to
+            query += """ and to_date <= '%s'""" % self.date_to
 
         self.env.cr.execute(query)
         rent_request_data = self.env.cr.dictfetchall()

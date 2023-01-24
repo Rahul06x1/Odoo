@@ -52,7 +52,7 @@ class RentRequest(models.Model):
         self.vehicle.state = "available"
 
     def action_create_invoice(self):
-        self.request_state = "invoiced"
+
         invoice = self.env['account.move'].create({
             'move_type': 'out_invoice',
             'partner_id': self.customer_name.id,
@@ -65,6 +65,7 @@ class RentRequest(models.Model):
                 'price_unit': self.time_amount,
             })],
         })
+        self.request_state = "invoiced"
 
         return {
             'name': 'create_invoice',

@@ -17,7 +17,7 @@ $("#vehicle").change(function(){
                     $('#period_type').find('option').remove().end();
                     $('#time_amount').val(' ');
                     $.each(current, function(index) {
-                    console.log(current);
+                        console.log(current);
                         $('#period_type').append('<option value='+current[index].id+' data-time_amount='+current[index].time_amount+'>'+current[index].selection_time+ '</option>');
                         console.log($('#period_type'),'sssssssssssaaaaa')
 
